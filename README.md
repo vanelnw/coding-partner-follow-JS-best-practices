@@ -1,0 +1,1 @@
+# coding-partner-follow-JS-best-practices
