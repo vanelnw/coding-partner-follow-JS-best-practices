@@ -1,5 +1,6 @@
 import './style.css';
 import Todos from './todos.js';
+import { addTodo, removeTodo } from "./addRemove";
 
 const list = document.getElementById('list');
 const input = document.getElementById('input');
@@ -33,7 +34,8 @@ input.addEventListener('keydown', (event) => {
   if (event.code === 'Enter') {
     const toDo = input.value;
     if (toDo) {
-      MyTodos.addTodo(toDo, id);
+      console.log('yes');
+      addTodo(MyTodos.TodoList,toDo, id);
       id += 1;
     }
     input.value = '';
@@ -48,7 +50,7 @@ list.addEventListener('click', (event) => {
     if (element.getAttribute('name') === 'update') {
       MyTodos.updateTodo(element);
     } else if (element.getAttribute('name') === 'remove') {
-      MyTodos.removeTodo(element);
+      removeTodo(MyTodos, element);
     }
   }
 });

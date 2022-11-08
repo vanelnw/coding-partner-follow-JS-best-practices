@@ -1,3 +1,5 @@
+import {addTodo, removeTodo} from './addRemove'
+
 function displayTaks(id, todo, checked) {
   const list = document.getElementById('list');
   const done = checked ? 'done' : '';
@@ -23,19 +25,6 @@ export default class Todos {
     });
   }
 
-  addTodo(todo, id, status = false) {
-    const checked = status ? 'checked' : '';
-
-    displayTaks(id, todo, checked);
-
-    this.TodoList.push({
-      index: id,
-      description: todo,
-      completed: false,
-    });
-
-    localStorage.setItem('todos', JSON.stringify(this.TodoList));
-  }
 
   completeTodo(element) {
     if (element.checked) {
@@ -45,19 +34,6 @@ export default class Todos {
     }
     element.parentNode.classList.toggle('done');
     this.TodoList[element.id].completed = !this.TodoList[element.id].completed;
-    localStorage.setItem('todos', JSON.stringify(this.TodoList));
-  }
-
-  removeTodo(element) {
-    const cuurId = parseInt(element.id, 10);
-
-    this.TodoList = this.TodoList.filter((todo) => todo.index !== cuurId);
-
-    for (let i = cuurId; i < this.TodoList.length; i += 1) {
-      this.TodoList[i].index -= 1;
-    }
-    element.parentNode.parentNode.replaceChildren('');
-    this.renderTodos();
     localStorage.setItem('todos', JSON.stringify(this.TodoList));
   }
 
